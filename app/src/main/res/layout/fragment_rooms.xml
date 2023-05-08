@@ -25,24 +25,13 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_rooms_title"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/choose_a_room"-->
-<!--        style="@style/Heading1TextStyle"-->
-<!--        android:textColor="@color/colorButtonPrimary"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:layout_margin="16dp"/>-->
-    
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="16dp"
         android:id="@+id/rv_rooms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar_rooms"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:paddingBottom="?attr/actionBarSize"/>
 
 </LinearLayout>

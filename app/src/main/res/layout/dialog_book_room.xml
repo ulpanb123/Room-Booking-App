@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Heading1TextStyle"
+        android:textColor="@color/colorButtonPrimary"
+        android:text="@string/dialog_title"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_a_date"
+        style="@style/Header4"
+        android:textColor="@color/colorGray7"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="viewStart"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dateInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_selector_edit_text"
+        android:gravity="center"
+        android:hint="@string/start"
+        android:textColorHint="@color/colorGray3"
+        app:boxCollapsedPaddingTop="6dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintEnabled="true"
+        app:hintTextColor="@color/colorGray3"
+        android:layout_marginEnd="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="false"
+            android:layout_marginTop="-2dp"
+            android:id="@+id/dateInputEditText"
+            style="@style/Body1TextStyle"
+            android:background="@android:color/transparent"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHighlight="@color/colorGray3"
+            android:textCursorDrawable="@null"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Header4"
+        android:text="@string/indicate_the_timeslot"
+        android:layout_marginBottom="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/startTimeInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_selector_edit_text"
+            android:gravity="center"
+            android:hint="@string/start"
+            android:textColorHint="@color/colorGray3"
+            app:boxCollapsedPaddingTop="6dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintEnabled="true"
+            app:hintTextColor="@color/colorGray3"
+            android:layout_marginEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="-2dp"
+                android:id="@+id/startTimeInputEditText"
+                style="@style/Body1TextStyle"
+                android:background="@android:color/transparent"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHighlight="@color/colorGray3"
+                android:textCursorDrawable="@null"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/endTimeInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_selector_edit_text"
+            android:gravity="center"
+            android:hint="@string/end"
+            android:textColorHint="@color/colorGray3"
+            app:boxCollapsedPaddingTop="6dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintEnabled="true"
+            app:hintTextColor="@color/colorGray3">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="-2dp"
+                android:id="@+id/endTimeInputEditText"
+                style="@style/Body1TextStyle"
+                android:background="@android:color/transparent"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHighlight="@color/colorGray3"
+                android:textCursorDrawable="@null"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:textColor="@color/white"
+        android:layout_marginVertical="24dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/submit"
+        android:includeFontPadding="false"
+        style="@style/Button1TextStyle"
+        android:background="@drawable/bg_btn_orange" />
+
+
+
+
+</LinearLayout>

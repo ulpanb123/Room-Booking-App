@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_rooms" >
         <action
             android:id="@+id/action_navigation_rooms_to_roomDetailsFragment"
-            app:destination="@id/roomDetailsFragment" />
+            app:destination="@id/roomDetailsFragment"
+            app:popUpTo="@id/navigation_rooms" />
     </fragment>
 
     <fragment
@@ -25,7 +26,12 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.jusanbookingapp.presentation.profile.ProfileFragment"
         android:label="@string/string_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_userReservationsFragment"
+            app:destination="@id/userReservationsFragment"
+            app:popUpTo="@id/navigation_profile" />
+    </fragment>
     <fragment
         android:id="@+id/roomDetailsFragment"
         android:name="com.example.jusanbookingapp.presentation.rooms.roomDetails.RoomDetailsFragment"
@@ -35,4 +41,8 @@
             android:name="roomId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/userReservationsFragment"
+        android:name="com.example.jusanbookingapp.presentation.profile.userReservations.UserReservationsFragment"
+        android:label="UserReservationsFragment" />
 </navigation>

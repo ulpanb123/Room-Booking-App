@@ -30,4 +30,12 @@
     <string name="my_bookings">My Bookings</string>
     <string name="log_out">Log Out</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="mock_timeslot">12:00-15:00</string>
+    <string name="mock_date">12/12/2023</string>
+    <string name="dialog_title">Book a room:</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="pick_a_date">Pick a date:</string>
+    <string name="indicate_the_timeslot">Indicate the timeslot:</string>
+    <string name="submit">Submit</string>
 </resources>
