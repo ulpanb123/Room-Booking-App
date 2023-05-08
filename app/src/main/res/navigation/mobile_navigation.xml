@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_rooms">
+
+    <fragment
+        android:id="@+id/navigation_rooms"
+        android:name="com.example.jusanbookingapp.presentation.rooms.RoomsFragment"
+        android:label="@string/string_rooms"
+        tools:layout="@layout/fragment_rooms" >
+        <action
+            android:id="@+id/action_navigation_rooms_to_roomDetailsFragment"
+            app:destination="@id/roomDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_book"
+        android:name="com.example.jusanbookingapp.presentation.book.BookFragment"
+        android:label="@string/string_book"
+        tools:layout="@layout/fragment_book" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.jusanbookingapp.presentation.profile.ProfileFragment"
+        android:label="@string/string_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/roomDetailsFragment"
+        android:name="com.example.jusanbookingapp.presentation.rooms.roomDetails.RoomDetailsFragment"
+        android:label="fragment_room_details"
+        tools:layout="@layout/fragment_room_details" >
+        <argument
+            android:name="roomId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

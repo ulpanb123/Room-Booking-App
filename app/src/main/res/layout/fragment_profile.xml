@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.profile.ProfileFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:minHeight="?android:attr/actionBarSize"
+        app:navigationIcon="?attr/homeAsUpIndicator">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/profile"
+            style="@style/Heading2TextStyle"
+            android:textColor="@color/black"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_details"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorGray5"
+        android:scaleType="center"
+        app:shapeAppearanceOverlay="@style/circledShapeableImageView"
+        app:srcCompat="@drawable/ic_camera" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        style="@style/Header4"
+        android:layout_marginVertical="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:visibility="visible"
+        android:text="Name Surname"
+        android:textColor="@color/colorButtonPrimary" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        style="@style/Heading5RegularTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_username"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:text="name.surname@gmail.com"
+        android:textColor="@color/colorGray3" />
+
+    <LinearLayout
+        android:id="@+id/container_profile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorGrayBg"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_email">
+
+        <TextView
+            android:id="@+id/btn_my_bookings"
+            style="@style/Body2TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:drawableStart="@drawable/ic_profile_bookings"
+            android:drawableEnd="@drawable/ic_arrow"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/my_bookings"
+            android:textColor="@color/colorGray1" />
+
+        <LinearLayout
+            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/btn_dark_mode"
+                style="@style/Body2TextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/dark_mode"
+                android:textColor="@color/colorGray1"
+                app:drawableStartCompat="@drawable/ic_dark_mode" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_to_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/Body2TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:drawableStart="@drawable/ic_profile_exit"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/log_out"
+            android:textColor="@color/colorGray1" />
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

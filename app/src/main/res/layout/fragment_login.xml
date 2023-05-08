@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.auth.registration.RegistrationFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title"
+        style="@style/Heading1TextStyle"
+        android:textColor="@color/colorOrange"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_subtitle"
+        style="@style/Header4"
+        android:textColor="@color/colorGray7"
+        android:layout_marginBottom="24dp"
+        />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_selector_edit_text"
+        android:gravity="center"
+        android:hint="@string/username_hint"
+        android:textColorHint="@color/colorGray3"
+        app:boxCollapsedPaddingTop="6dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintEnabled="true"
+        app:hintTextColor="@color/colorGray3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-2dp"
+            android:id="@+id/usernameInputEditText"
+            style="@style/Body1TextStyle"
+            android:background="@android:color/transparent"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHighlight="@color/colorGray3"
+            android:textCursorDrawable="@null"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_selector_edit_text"
+        android:gravity="center"
+        android:hint="@string/password_hint"
+        android:textColorHint="@color/colorGray3"
+        app:boxCollapsedPaddingTop="6dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintEnabled="true"
+        app:hintTextColor="@color/colorGray3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEditTextView"
+            style="@style/Body1TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-2dp"
+            android:background="@android:color/transparent"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHighlight="@color/colorGray3"
+            android:textCursorDrawable="@null" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.kusu.loadingbutton.LoadingButton
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/login"
+        android:includeFontPadding="false"
+        android:enabled="false"
+        style="@style/Button1TextStyle"
+        app:lb_buttonColor="@color/colorButtonPrimary"
+        app:lb_loaderColor="@color/white"
+        app:lb_cornerRadius="8dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_user"
+            style="@style/Header4"
+            android:layout_marginEnd="4dp"/>
+
+        <TextView
+            android:id="@+id/createUserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_account"
+            style="@style/Header4"
+            android:textColor="@color/colorPrimaryText"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

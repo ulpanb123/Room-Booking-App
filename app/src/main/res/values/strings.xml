@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">JusanBookingApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="string_rooms">Rooms</string>
+    <string name="string_book">Book</string>
+    <string name="string_profile">Profile</string>
+    <string name="emailInput">Email</string>
+    <string name="username_hint">Username</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register_account_title">Register Account</string>
+    <string name="register_subtitle">Fill your details or continue if you\'re already signed up</string>
+    <string name="password_hint">Password</string>
+    <string name="login_title">Welcome Back!</string>
+    <string name="login_subtitle">Fill your details or create an account if you don\'t have one</string>
+    <string name="login">Login</string>
+    <string name="new_user">New user? </string>
+    <string name="create_account">Create Account</string>
+    <string name="already_have_account">Already have account?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_a_room">Choose a room</string>
+    <string name="all_rooms_toolbar">All Rooms</string>
+    <string name="description">Description</string>
+    <string name="mock_room_descr">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type.</string>
+    <string name="facilities">Facilities</string>
+    <string name="btn_book">Book a room</string>
+    <string name="profile">Profile</string>
+    <string name="my_bookings">My Bookings</string>
+    <string name="log_out">Log Out</string>
+    <string name="dark_mode">Dark Mode</string>
+</resources>
