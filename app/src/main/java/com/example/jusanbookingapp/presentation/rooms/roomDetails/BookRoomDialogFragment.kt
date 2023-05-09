@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat.getSystemService
@@ -29,6 +30,10 @@ class BookRoomDialogFragment : DialogFragment() {
     private lateinit var etStartTime : TextInputEditText
     private lateinit var etEndTime : TextInputEditText
     private lateinit var btnSubmit : AppCompatButton
+    private lateinit var btnClose : AppCompatButton
+
+    private lateinit var dialogMainContent : LinearLayout
+    private lateinit var dialogSuccess : LinearLayout
 
     private lateinit var timeSlot : TimeSlot
     private var datePicked : Long = 0L
@@ -46,10 +51,20 @@ class BookRoomDialogFragment : DialogFragment() {
             etStartTime = findViewById(R.id.startTimeInputEditText)
             etEndTime = findViewById(R.id.endTimeInputEditText)
             btnSubmit= findViewById(R.id.submitButton)
+            btnClose = findViewById(R.id.closeButton)
+
+            dialogMainContent= findViewById(R.id.dialog_main_content)
+            dialogSuccess = findViewById(R.id.dialog_success)
         }
         btnSubmit.setOnClickListener {
             saveTimeSlot()
             //submitBooking()
+
+            dialogMainContent.visibility = View.GONE
+            dialogSuccess.visibility = View.VISIBLE
+        }
+
+        btnClose.setOnClickListener {
             dialog.dismiss()
         }
 

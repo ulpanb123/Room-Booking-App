@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.ButtonBarLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jusanbookingapp.R
@@ -59,7 +60,7 @@ class ReservationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     private var tvDate: TextView = itemView.findViewById(R.id.tv_date)
     private var tvTimeslot: TextView = itemView.findViewById(R.id.tv_timeslot)
 
-    var btnDelete: AppCompatButton = itemView.findViewById(R.id.btn_delete)
+    var btnDelete: AppCompatImageButton = itemView.findViewById(R.id.btn_delete)
 
     fun bind(reservation: Reservation) {
         tvRoomId.text = reservation.room.roomNumber

@@ -38,4 +38,8 @@
     <string name="pick_a_date">Pick a date:</string>
     <string name="indicate_the_timeslot">Indicate the timeslot:</string>
     <string name="submit">Submit</string>
+    <string name="booking_success">Booking Success!</string>
+    <string name="success_subtitle">Your booking for Ideation Room on Sunday, March 19, 2023 is confirmed.</string>
+    <string name="close">Close</string>
+    <string name="add_event_to_your_calendar">Add event to your calendar?</string>
 </resources>

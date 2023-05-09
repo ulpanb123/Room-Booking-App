@@ -16,11 +16,14 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_room"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btn_delete"
-            android:layout_width="104dp"
-            android:layout_height="104dp"
-            android:src="@drawable/ic_launcher"
+            app:layout_constraintTop_toTopOf="@id/details"
+            app:layout_constraintBottom_toBottomOf="@id/details"
+            app:layout_constraintEnd_toStartOf="@id/details"
+            app:layout_constraintHorizontal_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/img_office"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/WithRadiusShapeableImageView"
             android:layout_marginEnd="8dp"
             />
@@ -60,9 +63,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintStart_toEndOf="@id/img_room"
-            app:layout_constraintTop_toTopOf="@id/img_room"
-            app:layout_constraintBottom_toBottomOf="@id/img_room"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_delete"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="6"
             android:layout_marginStart="8dp"
             >
             <TextView
@@ -126,15 +130,18 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_delete"
             style="@style/Button1TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/bg_btn_delete"
-            android:text="Delete"
-            android:textColor="@color/darkRed"
+            android:src="@drawable/ic_trash"
+            android:padding="8dp"
+            android:textColor="@color/redForDelete"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/details"
             tools:layout_editor_absoluteX="8dp" />

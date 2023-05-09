@@ -27,6 +27,7 @@
 
     <color name="lightRed">#FFC1CE</color>
     <color name="darkRed">#811211</color>
+    <color name="redForDelete">#E12A3A</color>
 
     <color name="lightGreen">#D4EADD</color>
     <color name="darkGreen">#238443</color>
