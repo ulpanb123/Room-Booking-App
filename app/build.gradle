@@ -54,5 +54,8 @@ dependencies {
     //loading button dependency 1
     implementation 'com.github.koushikcse:LoadingButton:1.7'
 
-    implementation 'com.kizitonwose.calendar:view:2.0.0'
+    //calendar
+    implementation 'com.github.badoualy:datepicker-timeline:c6dcd05737'
+
+    implementation 'com.github.shrikanth7698:Collapsible-Calendar-View-Android:v1.0.3'
 }

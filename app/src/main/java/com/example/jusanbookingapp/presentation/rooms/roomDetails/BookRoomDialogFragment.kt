@@ -77,25 +77,10 @@ class BookRoomDialogFragment : DialogFragment() {
     }
 
     private fun initDatePicker() {
-        etDate.setOnClickListener {
-            val picker =
-                MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("Select date")
-                    .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
-                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                    .build()
-
-            picker.addOnPositiveButtonClickListener {
-                val selectedDate = picker.selection ?: 0L
-
-                datePicked = selectedDate
-
-                val format = "yyyy-MM-dd"
-                val date = Date(selectedDate).convertMillisToDate(format)
-                etDate.setText(date)
-            }
-            picker.show(parentFragmentManager, "tag");
-        }
+        val sharedPrefs = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        datePicked = sharedPrefs?.getLong("date", 0L) ?: 0L
+        val date = Date(datePicked).convertMillisToDate("yyyy-MM-dd")
+        etDate.setText(date)
     }
 
     private fun initTimePicker() {

@@ -55,16 +55,24 @@
         <item name="cornerSize">10%</item>
     </style>
 
-    <style name="ChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
-        <item name="chipBackgroundColor">@color/colorGrayBg</item>
-        <item name="android:textColor">@color/colorButtonPrimary</item>
-        <item name="chipStartPadding">4dp</item>
-        <item name="chipEndPadding">4dp</item>
-        <item name="chipCornerRadius">4dp</item>
-    </style>
+
 
     <style name="circledShapeableImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="ThinnerChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipCornerRadius">4dp</item>
+        <item name="chipMinHeight">16dp</item>
+        <item name="android:textAppearance">@style/Heading5RegularTextStyle</item>
+        <item name="chipBackgroundColor">@color/colorGrayBg</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
+
+    <style name="FacilitiesChip" parent="ThinnerChip">
+        <item name="android:padding">4dp</item>
+    </style>
+
+
 </resources>

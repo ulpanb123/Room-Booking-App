@@ -42,4 +42,5 @@
     <string name="success_subtitle">Your booking for Ideation Room on Sunday, March 19, 2023 is confirmed.</string>
     <string name="close">Close</string>
     <string name="add_event_to_your_calendar">Add event to your calendar?</string>
+    <string name="empty_bookings">No bookings for this day</string>
 </resources>

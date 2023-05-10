@@ -42,6 +42,7 @@
                 android:background="@drawable/bg_timeslot"
                 android:text="@string/mock_timeslot"
                 android:padding="4dp"
+                style="@style/Heading5RegularTextStyle"
                 />
 
             <TextView
@@ -91,39 +92,40 @@
                 android:layout_height="wrap_content"
                 app:chipBackgroundColor="@color/colorGrayBg"
                 app:chipIcon="@drawable/ic_capacity"
-                android:padding="4dp"
                 app:iconStartPadding="4dp"
-                style="@style/Heading5RegularTextStyle"
+                style="@style/ThinnerChip"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:paddingVertical="4dp"
                 tools:text="40"
                 android:textColor="@color/colorOrange"
-                app:chipIconTint="@color/colorOrange"
-                app:chipCornerRadius="4dp" />
+                app:chipIconTint="@color/colorOrange" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:selectionRequired="true"
-                app:singleLine="true"
-                app:singleSelection="true">
+                app:chipSpacingHorizontal="4dp"
+                app:chipSpacingVertical="4dp"
+                >
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Wifi"
-                    style="@style/ChipChoice" />
+                    style="@style/FacilitiesChip" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Projector"
-                    style="@style/ChipChoice" />
+                    style="@style/FacilitiesChip" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Air conditioner"
-                    style="@style/ChipChoice" />
+                    style="@style/FacilitiesChip" />
 
             </com.google.android.material.chip.ChipGroup>
 

@@ -24,11 +24,17 @@
             android:textColor="@color/white"/>
 
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:contentDescription="@null"
+        android:fitsSystemWindows="true"
+        android:paddingBottom="?attr/actionBarSize"
         app:layout_constraintTop_toBottomOf="@id/toolbar_details"
-        android:contentDescription="@null">
+        tools:layout_editor_absoluteX="-16dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -36,139 +42,183 @@
             <ImageView
                 android:id="@+id/iv_room_image"
                 android:layout_width="match_parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_height="240dp"
-                android:src="@drawable/img_office"
                 android:foreground="@drawable/img_with_gradient"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_office"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_capacity"
+                style="@style/ThinnerChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/iv_room_image"
-                app:layout_constraintBottom_toBottomOf="@id/iv_room_image"
                 android:layout_marginEnd="16dp"
-                app:chipBackgroundColor="@color/colorGrayBg"
-                app:chipIcon="@drawable/ic_capacity"
-                android:padding="4dp"
-                app:iconStartPadding="4dp"
-                style="@style/Heading5RegularTextStyle"
+                android:paddingVertical="4dp"
                 android:text="40"
                 android:textColor="@color/colorOrange"
+                app:chipIcon="@drawable/ic_capacity"
                 app:chipIconTint="@color/colorOrange"
-                app:chipCornerRadius="4dp" />
+                app:iconStartPadding="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_room_image"
+                app:layout_constraintEnd_toEndOf="@id/iv_room_image" />
 
             <LinearLayout
-                android:elevation="2dp"
                 android:layout_width="64dp"
                 android:layout_height="16dp"
-                app:icon="@drawable/ic_floor"
-                android:background="@color/transparent"
-                app:layout_constraintStart_toStartOf="@id/iv_room_image"
-                app:layout_constraintBottom_toBottomOf="@id/iv_room_image"
                 android:layout_margin="16dp"
-                android:orientation="horizontal">
+                android:background="@color/transparent"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                app:icon="@drawable/ic_floor"
+                app:layout_constraintBottom_toBottomOf="@id/iv_room_image"
+                app:layout_constraintStart_toStartOf="@id/iv_room_image">
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_floor"
-                    />
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_floor" />
 
                 <TextView
                     android:id="@+id/tv_room_floor"
+                    style="@style/Heading5RegularTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="16 floor"
-                    style="@style/Heading5RegularTextStyle"
-                    android:textColor="@color/colorButtonPrimary"/>
+                    android:textColor="@color/colorButtonPrimary" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_title_decr"
+                style="@style/Heading2TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/iv_room_image"
                 android:layout_margin="16dp"
-                style="@style/Heading2TextStyle"
+                android:text="@string/description"
                 android:textColor="@color/colorButtonPrimary"
-                android:text="@string/description"/>
+                app:layout_constraintTop_toBottomOf="@id/iv_room_image" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_descr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_decr"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                app:cardCornerRadius="4dp">
+                app:cardCornerRadius="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_decr">
+
                 <TextView
                     android:id="@+id/tv_room_descr"
+                    style="@style/Heading5RegularTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mock_room_descr"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
-                    style="@style/Heading5RegularTextStyle"
-                    android:textColor="@color/black"/>
+                    android:text="@string/mock_room_descr"
+                    android:textColor="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/tv_facilities_title"
+                style="@style/Heading2TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                app:layout_constraintTop_toBottomOf="@id/cv_descr"
                 android:text="@string/facilities"
-                style="@style/Heading2TextStyle"
                 android:textColor="@color/colorButtonPrimary"
-                android:layout_marginHorizontal="16dp"/>
+                app:layout_constraintTop_toBottomOf="@id/cv_descr" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_facilities_title"
                 android:layout_marginHorizontal="16dp"
-                app:selectionRequired="true"
-                app:singleLine="true"
-                app:singleSelection="true">
+                android:layout_marginTop="8dp"
+                app:chipSpacingHorizontal="4dp"
+                app:chipSpacingVertical="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_facilities_title">
 
                 <com.google.android.material.chip.Chip
+                    style="@style/FacilitiesChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wifi"
-                    style="@style/ChipChoice" />
+                    android:text="Wifi" />
 
                 <com.google.android.material.chip.Chip
+                    style="@style/FacilitiesChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Projector"
-                    style="@style/ChipChoice" />
+                    android:text="Projector" />
 
                 <com.google.android.material.chip.Chip
+                    style="@style/FacilitiesChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Air conditioner"
-                    style="@style/ChipChoice" />
+                    android:text="Air conditioner" />
 
             </com.google.android.material.chip.ChipGroup>
 
+            <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+                android:id="@+id/timeslot_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:expandIconColor="@color/colorOrange"
+                app:layout_constraintTop_toBottomOf="@id/chipGroup"
+                app:selectedItem_background="@drawable/bg_selected_date"
+                app:selectedItem_textColor="@color/white"
+                app:textColor="@color/colorButtonPrimary"
+                app:todayItem_background="@drawable/bg_todays_date" />
+
+            <View
+                android:id="@+id/view_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="16dp"
+                android:background="@color/colorGray3"
+                app:layout_constraintTop_toBottomOf="@id/timeslot_picker" />
+
+            <FrameLayout
+                android:id="@+id/events_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@id/view_divider">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_events_by_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_empty_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty_bookings"
+                    android:layout_marginVertical="8dp"
+                    style="@style/Heading2TextStyle"
+                    android:textColor="@color/colorButtonPrimary"
+                    android:textAlignment="center"/>
+
+            </FrameLayout>
+
             <Button
                 android:id="@+id/bookButton"
+                style="@style/Button1TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                app:layout_constraintTop_toBottomOf="@id/chipGroup"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textColor="@color/white"
                 android:layout_margin="16dp"
+                android:backgroundTint="@color/colorOrange"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/btn_book"
-                style="@style/Button1TextStyle"
-                android:backgroundTint="@color/colorOrange" />
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/events_container" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
