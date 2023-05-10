@@ -95,7 +95,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/login"
         android:includeFontPadding="false"
-        android:enabled="false"
+        android:enabled="true"
         style="@style/Button1TextStyle"
         app:lb_buttonColor="@color/colorButtonPrimary"
         app:lb_loaderColor="@color/white"

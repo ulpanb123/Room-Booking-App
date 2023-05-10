@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/registrationFragment">
+
+
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.jusanbookingapp.presentation.auth.registration.RegistrationFragment"
+        android:label="RegistrationFragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.jusanbookingapp.presentation.auth.login.LoginFragment"
+        android:label="LoginFragment" />
+</navigation>
