@@ -109,7 +109,7 @@
             android:layout_marginTop="-2dp"
             android:background="@android:color/transparent"
             android:imeOptions="actionNext"
-            android:inputType="textCapSentences"
+            android:inputType="textPassword"
             android:textColor="@color/colorPrimaryText"
             android:textColorHighlight="@color/colorGray3"
             android:textCursorDrawable="@null" />
@@ -126,7 +126,7 @@
         android:includeFontPadding="false"
         android:enabled="false"
         style="@style/Button1TextStyle"
-        app:lb_buttonColor="@color/colorButtonPrimary"
+        app:lb_buttonColor="@color/colorGray6"
         app:lb_loaderColor="@color/white"
         app:lb_cornerRadius="8dp"/>
 

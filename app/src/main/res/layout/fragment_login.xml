@@ -80,7 +80,7 @@
             android:layout_marginTop="-2dp"
             android:background="@android:color/transparent"
             android:imeOptions="actionNext"
-            android:inputType="textCapSentences"
+            android:inputType="textPassword"
             android:textColor="@color/colorPrimaryText"
             android:textColorHighlight="@color/colorGray3"
             android:textCursorDrawable="@null" />

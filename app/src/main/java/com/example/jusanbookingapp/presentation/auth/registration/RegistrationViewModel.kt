@@ -1,24 +1,22 @@
 package com.example.jusanbookingapp.presentation.auth.registration
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.jusanbookingapp.domain.models.User
+import androidx.lifecycle.viewModelScope
+import com.example.jusanbookingapp.constants.AppPreferences
+import com.example.jusanbookingapp.domain.use_cases.RegisterUseCase
 import kotlinx.coroutines.launch
 
-class RegistrationViewModel : ViewModel() {
+class RegistrationViewModel(private val registerUseCase: RegisterUseCase) : ViewModel() {
     lateinit var email : String
     lateinit var username : String
     lateinit var password : String
 
     fun onSubmit() {
-        val updateProfileRequest = User(username, email, password)
-//        _navigateToMainActivity.value = true
-        uiScope.launch {
-            try {
-                BaspanaApi.retrofitService.updateProfile(updateProfileRequest)
-            } catch (t: Throwable) {
-                Log.d("Registration.ViewModel", t.message.toString())
-            }
+        viewModelScope.launch {
+            registerUseCase(username = username, email = email, password = password)
+            AppPreferences.username = username
+            AppPreferences.userEmail = email
+            AppPreferences.password = password
         }
     }
 

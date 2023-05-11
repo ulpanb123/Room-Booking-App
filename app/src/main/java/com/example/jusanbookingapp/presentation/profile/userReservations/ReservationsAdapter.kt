@@ -4,13 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.appcompat.widget.ButtonBarLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jusanbookingapp.R
 import com.example.jusanbookingapp.domain.models.Reservation
-import com.example.jusanbookingapp.domain.models.Room
 import com.example.jusanbookingapp.presentation.utils.ClickListener
 import com.google.android.material.chip.Chip
 
@@ -63,11 +60,11 @@ class ReservationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     var btnDelete: AppCompatImageButton = itemView.findViewById(R.id.btn_delete)
 
     fun bind(reservation: Reservation) {
-        tvRoomId.text = reservation.room.roomNumber
-        tvFloor.text = reservation.room.roomFloor
-        tvCapacity.text = reservation.room.roomCapacity
-
-        tvDate.text = reservation.date
-        tvTimeslot.text = reservation.timeslot
+//        tvRoomId.text = reservation.room.roomNumber
+//        tvFloor.text = reservation.room.floor
+//        tvCapacity.text = reservation.room.capacity
+//
+//        tvDate.text = reservation.date
+//        tvTimeslot.text = reservation.timeslot
     }
 }

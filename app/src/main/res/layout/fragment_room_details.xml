@@ -16,6 +16,7 @@
         app:navigationIcon="@drawable/ic_back">
 
         <TextView
+            android:id="@+id/toolbar_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -39,14 +40,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_room_image"
+            <FrameLayout
+                android:id="@+id/image_container"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:foreground="@drawable/img_with_gradient"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_office"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent" >
+                <androidx.viewpager.widget.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/images_pager" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:elevation="4dp"/>
+            </FrameLayout>
+
+
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_capacity"
@@ -55,13 +67,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:paddingVertical="4dp"
-                android:text="40"
+                tools:text="40"
                 android:textColor="@color/colorOrange"
                 app:chipIcon="@drawable/ic_capacity"
                 app:chipIconTint="@color/colorOrange"
                 app:iconStartPadding="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/iv_room_image"
-                app:layout_constraintEnd_toEndOf="@id/iv_room_image" />
+                app:layout_constraintBottom_toBottomOf="@id/image_container"
+                app:layout_constraintEnd_toEndOf="@id/image_container" />
 
             <LinearLayout
                 android:layout_width="64dp"
@@ -71,8 +83,8 @@
                 android:elevation="2dp"
                 android:orientation="horizontal"
                 app:icon="@drawable/ic_floor"
-                app:layout_constraintBottom_toBottomOf="@id/iv_room_image"
-                app:layout_constraintStart_toStartOf="@id/iv_room_image">
+                app:layout_constraintBottom_toBottomOf="@id/image_container"
+                app:layout_constraintStart_toStartOf="@id/image_container">
 
                 <ImageView
                     android:layout_width="0dp"
@@ -85,7 +97,7 @@
                     style="@style/Heading5RegularTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="16 floor"
+                    tools:text="16 floor"
                     android:textColor="@color/colorButtonPrimary" />
 
             </LinearLayout>
@@ -98,7 +110,7 @@
                 android:layout_margin="16dp"
                 android:text="@string/description"
                 android:textColor="@color/colorButtonPrimary"
-                app:layout_constraintTop_toBottomOf="@id/iv_room_image" />
+                app:layout_constraintTop_toBottomOf="@id/image_container" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_descr"
@@ -140,24 +152,6 @@
                 app:chipSpacingHorizontal="4dp"
                 app:chipSpacingVertical="4dp"
                 app:layout_constraintTop_toBottomOf="@id/tv_facilities_title">
-
-                <com.google.android.material.chip.Chip
-                    style="@style/FacilitiesChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wifi" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/FacilitiesChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Projector" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/FacilitiesChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Air conditioner" />
 
             </com.google.android.material.chip.ChipGroup>
 

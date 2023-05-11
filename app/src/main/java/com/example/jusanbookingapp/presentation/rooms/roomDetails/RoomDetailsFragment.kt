@@ -1,29 +1,35 @@
 package com.example.jusanbookingapp.presentation.rooms.roomDetails
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.example.jusanbookingapp.R
 import com.example.jusanbookingapp.domain.models.Event
-import com.example.jusanbookingapp.presentation.rooms.RoomsAdapter
 import com.example.jusanbookingapp.presentation.utils.SpaceItemDecoration
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.google.android.material.tabs.TabLayoutMediator
 import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import me.relex.circleindicator.CircleIndicator
+import okhttp3.internal.toImmutableList
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+import java.util.*
 
 
 class RoomDetailsFragment : Fragment() {
@@ -35,7 +41,21 @@ class RoomDetailsFragment : Fragment() {
     )
     lateinit var adapter: EventsAdapter
 
-    private lateinit var viewModel: RoomDetailsViewModel
+    val args: RoomDetailsFragmentArgs by navArgs()
+    val viewModel: RoomDetailsViewModel by viewModel {
+        parametersOf(args.roomNumber)
+    }
+
+    //details
+    private lateinit var tvTitle : TextView
+    lateinit var viewPagerAdapter: ImageSliderAdapter
+    lateinit var indicator: CircleIndicator
+    lateinit var viewpager : ViewPager
+    private lateinit var tvFloor : TextView
+    private lateinit var chipCapacity : Chip
+    private lateinit var tvDescr : TextView
+    private lateinit var chipGroup : ChipGroup
+
     private lateinit var btnBookRoom : Button
     private lateinit var toolbar : Toolbar
     private lateinit var datePicker : CollapsibleCalendar
@@ -56,11 +76,17 @@ class RoomDetailsFragment : Fragment() {
         initViews(view)
         initAdapter()
         initRecycler()
-
-
+        initObservers()
     }
 
     fun initViews(view : View) {
+        tvTitle = view.findViewById(R.id.toolbar_text)
+        indicator = view.findViewById(R.id.indicator)
+        viewpager = view.findViewById(R.id.images_pager)
+        tvFloor = view.findViewById(R.id.tv_room_floor)
+        chipCapacity = view.findViewById(R.id.chip_capacity)
+        tvDescr = view.findViewById(R.id.tv_room_descr)
+        chipGroup = view.findViewById(R.id.chipGroup)
 
         btnBookRoom = view.findViewById(R.id.bookButton)
         btnBookRoom.setOnClickListener {
@@ -79,10 +105,10 @@ class RoomDetailsFragment : Fragment() {
 
         rvEvents = view.findViewById(R.id.rv_events_by_date)
         tvEmptyDay = view.findViewById(R.id.tv_empty_day)
-
         initDatePicker(view)
 
     }
+
 
     fun initDatePicker(view : View) {
         datePicker = view.findViewById(R.id.timeslot_picker)
@@ -106,9 +132,21 @@ class RoomDetailsFragment : Fragment() {
                 //if it's not, display all events
 
                 val day: Day = datePicker.selectedDay!!
-                val calendar : Calendar = Calendar.getInstance()
+                val calendar : Calendar = Calendar.getInstance().apply {
+                    set(Calendar.HOUR, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                }
                 calendar.set(day.year, day.month, day.day)
                 selectedDate = calendar.timeInMillis
+
+                calendar.set(day.year, day.month, day.day+1)
+                val nextDay = calendar.timeInMillis
+
+                Log.e("Range", "$selectedDate --- $nextDay")
+                viewModel.getReservationByDate(selectedDate.toInt(), nextDay.toInt())
+
+
 
                 tvEmptyDay.visibility = View.GONE
                 rvEvents.visibility = View.VISIBLE
@@ -144,6 +182,38 @@ class RoomDetailsFragment : Fragment() {
         rvEvents.addItemDecoration(spaceItemDecoration)
 
         adapter.setData(mockEvents)
+    }
+
+    private fun initObservers() {
+        viewModel.currRoom.observe(viewLifecycleOwner) {room ->
+            tvTitle.text = "Room ${room.roomNumber}"
+            tvFloor.text = "Floor ${room.floor}"
+            chipCapacity.text = room.capacity
+            tvDescr.text = room.description
+
+            (room.facilities).forEach {
+                (layoutInflater.inflate(R.layout.chip_facilities, chipGroup, false) as? Chip)?.let { chip ->
+                    chip.id = View.generateViewId()
+                    chip.text = it.name
+                    chipGroup.addView(chip)
+                }
+            }
+
+            if(room.images.isNotEmpty()) {
+                val list = mutableListOf<String>()
+                room.images.forEach {
+                    list.add(it.url)
+                }
+                viewPagerAdapter = ImageSliderAdapter(requireContext(), list)
+                viewpager.adapter = viewPagerAdapter
+                indicator = requireView().findViewById(R.id.indicator) as CircleIndicator
+                indicator.setViewPager(viewpager)
+            }
+        }
+
+        viewModel.eventsForDate.observe(viewLifecycleOwner) {
+            Log.e(this::class.simpleName, it.toString())
+        }
     }
 
 

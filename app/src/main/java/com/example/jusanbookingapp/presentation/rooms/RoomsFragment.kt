@@ -1,6 +1,7 @@
 package com.example.jusanbookingapp.presentation.rooms
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,18 +13,17 @@ import com.example.jusanbookingapp.R
 import com.example.jusanbookingapp.domain.models.Room
 import com.example.jusanbookingapp.presentation.utils.ClickListener
 import com.example.jusanbookingapp.presentation.utils.SpaceItemDecoration
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class RoomsFragment : Fragment() {
 
-//    private val vm: PostsViewModel by viewModel()
+    private val vm: RoomsViewModel by viewModel()
 
     lateinit var rvRooms: RecyclerView
 
     lateinit var adapter: RoomsAdapter
 
-    val tempData : List<Room> = listOf(Room("Mac room", "Floor 3", "40", ""),
-        Room("Main Room", "Floor 3", "60", ""))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +37,8 @@ class RoomsFragment : Fragment() {
         initViews(view)
         initAdapter()
         initRecycler()
-//        initObservers()
+        Log.e(this.javaClass.name, vm.rooms.toString())
+        initObservers()
     }
 
     private fun initViews(view: View) {
@@ -45,7 +46,7 @@ class RoomsFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        adapter = RoomsAdapter(layoutInflater)
+        adapter = RoomsAdapter(requireContext(), layoutInflater)
         adapter.listener = ClickListener { room ->
             onRoomClick(room)
         }
@@ -53,7 +54,7 @@ class RoomsFragment : Fragment() {
 
     private fun onRoomClick(room: Room) {
         findNavController().navigate(
-            RoomsFragmentDirections.actionNavigationRoomsToRoomDetailsFragment(1)
+            RoomsFragmentDirections.actionNavigationRoomsToRoomDetailsFragment(room.roomNumber)
         )
     }
 
@@ -66,7 +67,12 @@ class RoomsFragment : Fragment() {
         val spaceItemDecoration =
             SpaceItemDecoration(verticalSpaceInDp = 8, horizontalSpaceInDp = 16)
         rvRooms.addItemDecoration(spaceItemDecoration)
-
-        adapter.setData(tempData)
     }
+
+    private fun initObservers() {
+        vm.rooms.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
+    }
+
 }

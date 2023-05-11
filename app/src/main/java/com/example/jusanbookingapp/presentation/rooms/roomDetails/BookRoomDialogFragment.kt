@@ -4,23 +4,15 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.DialogFragment
 import com.example.jusanbookingapp.R
-import com.example.jusanbookingapp.domain.models.TimeSlot
 import com.example.jusanbookingapp.presentation.utils.extensions.convertMillisToDate
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -146,6 +138,11 @@ class BookRoomDialogFragment : DialogFragment() {
     private fun saveTimeSlot() {
         timeSlot = TimeSlot(datePicked+startTime, datePicked+endTime)
     }
+
+    data class TimeSlot(
+        val start : Long,
+        val end : Long
+    )
 
 
 }

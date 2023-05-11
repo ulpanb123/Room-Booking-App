@@ -25,9 +25,9 @@ class UserReservationsFragment : Fragment() {
 
     private lateinit var toolbar: Toolbar
 
-    val tempData : List<Reservation> = listOf(
-        Reservation("15/07/2023", "15:00-15:30", Room("Mac room", "Floor 3", "40", "")),
-        Reservation("14/08/2023", "18:00-00:00", Room("Main Room", "Floor 3", "60", "")))
+//    val tempData : List<Reservation> = listOf(
+//        Reservation("15/07/2023", "15:00-15:30", Room("Mac room", "Floor 3", "40", "")),
+//        Reservation("14/08/2023", "18:00-00:00", Room("Main Room", "Floor 3", "60", "")))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +72,7 @@ class UserReservationsFragment : Fragment() {
             SpaceItemDecoration(verticalSpaceInDp = 8, horizontalSpaceInDp = 16)
         rvReservations.addItemDecoration(spaceItemDecoration)
 
-        adapter.setData(tempData)
+//        adapter.setData(tempData)
     }
 
 }
