@@ -88,6 +88,10 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+    
     //CircleIndicator
     implementation 'me.relex:circleindicator:2.1.6'
+
+    //Shimmer effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }

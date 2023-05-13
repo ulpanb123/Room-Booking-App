@@ -22,11 +22,12 @@ class LauncherActivity : AppCompatActivity() {
             modules(networkModule, viewModelModule, repositoryModule, useCaseModule)
         }
 
+//        AppPreferences.accessToken = null
 //        val intent = Intent(this, AuthActivity::class.java)
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 //        setContentView(R.layout.activity_auth)
 //        startActivity(intent)
-//
+
 
         if((AppPreferences.accessToken).isNullOrEmpty()) {
             val intent = Intent(this, AuthActivity::class.java)

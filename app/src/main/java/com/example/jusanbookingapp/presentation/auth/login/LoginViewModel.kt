@@ -23,11 +23,10 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
         viewModelScope.launch {
             val response = loginUseCase(username = username, password = password)
             AppPreferences.accessToken = response.token
+            AppPreferences.userId = response.userID
             _isLoggedIn.postValue(true)
 
-            Log.e("Viewmodel", response.token)
-
-            AppPreferences.userId = response.userId
+            Log.e("Viewmodel", response.userID.toString())
         }
     }
 }

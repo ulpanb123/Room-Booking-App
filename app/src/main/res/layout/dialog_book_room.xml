@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pick_a_date"
+            android:text="@string/purpose"
             style="@style/Header4"
             android:textColor="@color/colorGray7"
             android:layout_marginBottom="8dp"
@@ -37,7 +37,6 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/bg_selector_edit_text"
             android:gravity="center"
-            android:hint="@string/start"
             android:textColorHint="@color/colorGray3"
             app:boxCollapsedPaddingTop="6dp"
             app:boxStrokeWidth="0dp"
@@ -48,7 +47,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusableInTouchMode="false"
+                android:focusableInTouchMode="true"
                 android:layout_marginTop="-2dp"
                 android:id="@+id/dateInputEditText"
                 style="@style/Body1TextStyle"

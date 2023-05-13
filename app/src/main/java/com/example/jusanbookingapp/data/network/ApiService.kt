@@ -1,15 +1,9 @@
 package com.example.jusanbookingapp.data.network
 
-import com.example.jusanbookingapp.data.models.GetReservationsRequest
-import com.example.jusanbookingapp.data.models.LoginRequest
-import com.example.jusanbookingapp.data.models.LoginResponse
-import com.example.jusanbookingapp.data.models.RegisterRequest
+import com.example.jusanbookingapp.data.models.*
 import com.example.jusanbookingapp.domain.models.Reservation
 import com.example.jusanbookingapp.domain.models.Room
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -34,5 +28,19 @@ interface ApiService {
         @Path("roomNumber") roomNumber: String,
         @Body param : GetReservationsRequest
     ) : List<Reservation>
+
+    @GET("reservation/my")
+    suspend fun getUserReservations() : List<Reservation>
+
+    @PATCH("reservation/{roomNumber}")
+    suspend fun addReservation(
+        @Path("roomNumber") roomNumber: String,
+        @Body param : AddTimeSlotRequest
+    )
+
+    @DELETE("reservation/{roomNumber}/{timeslotID}")
+    suspend fun deleteReservation(
+        @Path("roomNumber") roomNumber: String,
+        @Path("timeslotID") timeslotID : Long)
 
 }

@@ -9,4 +9,7 @@ val useCaseModule = module{
     factory { GetAllRoomsUseCase(get()) }
     factory { GetRoomDetailsUseCase(get()) }
     factory { GetRoomReservationsByDateUseCase(get()) }
+    factory { GetUserReservationsUseCase(get()) }
+    factory { AddReservationUseCase(get()) }
+    factory { DeleteReservationUseCase(get())}
 }

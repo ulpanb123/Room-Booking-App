@@ -19,7 +19,11 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.jusanbookingapp.R
 import com.example.jusanbookingapp.domain.models.Event
+import com.example.jusanbookingapp.domain.models.Reservation
+import com.example.jusanbookingapp.domain.models.UserBookingInfo
+import com.example.jusanbookingapp.presentation.utils.ClickListener
 import com.example.jusanbookingapp.presentation.utils.SpaceItemDecoration
+import com.example.jusanbookingapp.presentation.utils.extensions.convertMillisToDate
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayoutMediator
@@ -29,16 +33,12 @@ import me.relex.circleindicator.CircleIndicator
 import okhttp3.internal.toImmutableList
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
 import java.util.*
 
 
-class RoomDetailsFragment : Fragment() {
+class RoomDetailsFragment : Fragment(), DialogListener {
 
-    val mockEvents = listOf(
-        Event("12:00-13:00", "Presentation"),
-        Event("13:15-14:00", "Java Lesson"),
-        Event("16:00-18:00", "Android Meetup")
-    )
     lateinit var adapter: EventsAdapter
 
     val args: RoomDetailsFragmentArgs by navArgs()
@@ -64,6 +64,7 @@ class RoomDetailsFragment : Fragment() {
     private lateinit var rvEvents : RecyclerView
 
     private var selectedDate : Long = 0L
+    private var nextDay : Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,10 +93,11 @@ class RoomDetailsFragment : Fragment() {
         btnBookRoom.setOnClickListener {
             val sharedPref = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
             val editor = sharedPref?.edit()
-            editor?.putLong("date", selectedDate)
+            editor?.putString("date", Date(selectedDate).convertMillisToDate("yyyy-MM-dd"))
             editor?.apply()
 
-            BookRoomDialogFragment().show(childFragmentManager, null)
+
+            BookRoomDialogFragment(this as DialogListener).show(childFragmentManager, null)
         }
 
         toolbar = view.findViewById(R.id.toolbar_details)
@@ -141,12 +143,10 @@ class RoomDetailsFragment : Fragment() {
                 selectedDate = calendar.timeInMillis
 
                 calendar.set(day.year, day.month, day.day+1)
-                val nextDay = calendar.timeInMillis
+                nextDay = calendar.timeInMillis
 
-                Log.e("Range", "$selectedDate --- $nextDay")
-                viewModel.getReservationByDate(selectedDate.toInt(), nextDay.toInt())
-
-
+                Log.e("Range", "${selectedDate.toInt()} --- ${nextDay.toInt()}")
+                viewModel.getReservationByDate(selectedDate, nextDay)
 
                 tvEmptyDay.visibility = View.GONE
                 rvEvents.visibility = View.VISIBLE
@@ -169,6 +169,14 @@ class RoomDetailsFragment : Fragment() {
 
     private fun initAdapter() {
         adapter = EventsAdapter(layoutInflater)
+        adapter.listener = ClickListener { timeslot ->
+            onTimeslotDelete(timeslot)
+        }
+    }
+
+    private fun onTimeslotDelete(timeslot : Reservation.TimeSlot) {
+        viewModel.deleteReservation(args.roomNumber, timeslot.timeslotID)
+        adapter.deleteElement(timeslot)
     }
 
     private fun initRecycler() {
@@ -180,8 +188,6 @@ class RoomDetailsFragment : Fragment() {
         val spaceItemDecoration =
             SpaceItemDecoration(verticalSpaceInDp = 4, horizontalSpaceInDp = 0)
         rvEvents.addItemDecoration(spaceItemDecoration)
-
-        adapter.setData(mockEvents)
     }
 
     private fun initObservers() {
@@ -209,12 +215,43 @@ class RoomDetailsFragment : Fragment() {
                 indicator = requireView().findViewById(R.id.indicator) as CircleIndicator
                 indicator.setViewPager(viewpager)
             }
+            viewModel.isAdded.observe(viewLifecycleOwner) {
+                if(it) {
+                    Log.e("TAG", "reached")
+                    viewModel.getReservationByDate(selectedDate, nextDay)
+                }
+            }
+
         }
 
         viewModel.eventsForDate.observe(viewLifecycleOwner) {
-            Log.e(this::class.simpleName, it.toString())
+            tvEmptyDay.visibility = View.GONE
+            adapter.setData(it)
+            if(it.isEmpty())
+                tvEmptyDay.visibility = View.VISIBLE
         }
     }
+
+    override fun onDialogClosed() {
+        val sharedPref = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val startTime = sharedPref?.getString("startTime", "") ?: ""
+        val endTime= sharedPref?.getString("endTime", "") ?: ""
+        val dateString = sharedPref?.getString("date", "") ?: ""
+
+        val startString = "$dateString $startTime"
+        val endString = "$dateString $endTime"
+
+        Log.e("TAG", startString)
+        Log.e("TAG", endString)
+
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val start = dateFormat.parse(startString)
+        val end = dateFormat.parse(endString)
+
+        val purpose = sharedPref?.getString("purpose", "purpose was not indicated") ?: ""
+        viewModel.addReservation(start.time, end.time, purpose)
+    }
+
 
 
 

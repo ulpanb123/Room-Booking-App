@@ -1,23 +1,24 @@
 package com.example.jusanbookingapp.presentation.profile.userReservations
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jusanbookingapp.R
-import com.example.jusanbookingapp.domain.models.Reservation
-import com.example.jusanbookingapp.domain.models.Room
-import com.example.jusanbookingapp.presentation.rooms.RoomsAdapter
-import com.example.jusanbookingapp.presentation.rooms.RoomsFragmentDirections
+import com.example.jusanbookingapp.databinding.ShimmerLayoutRoomBinding
+import com.example.jusanbookingapp.domain.models.UserBookingInfo
 import com.example.jusanbookingapp.presentation.utils.ClickListener
 import com.example.jusanbookingapp.presentation.utils.SpaceItemDecoration
+import com.facebook.shimmer.ShimmerFrameLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserReservationsFragment : Fragment() {
+    private val vm: UserReservationsViewModel by viewModel()
 
     private lateinit var rvReservations: RecyclerView
 
@@ -25,9 +26,9 @@ class UserReservationsFragment : Fragment() {
 
     private lateinit var toolbar: Toolbar
 
-//    val tempData : List<Reservation> = listOf(
-//        Reservation("15/07/2023", "15:00-15:30", Room("Mac room", "Floor 3", "40", "")),
-//        Reservation("14/08/2023", "18:00-00:00", Room("Main Room", "Floor 3", "60", "")))
+    private lateinit var shimmer : ShimmerFrameLayout
+
+    lateinit var data : List<UserBookingInfo>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +41,7 @@ class UserReservationsFragment : Fragment() {
         initViews(view)
         initAdapter()
         initRecycler()
-//        initObservers()
+        initObservers()
     }
 
     private fun initViews(view: View) {
@@ -49,6 +50,8 @@ class UserReservationsFragment : Fragment() {
         toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+        shimmer = view.findViewById(R.id.shimmerFrameLayout)
+        shimmer.startShimmer()
     }
 
     private fun initAdapter() {
@@ -58,7 +61,8 @@ class UserReservationsFragment : Fragment() {
         }
     }
 
-    private fun onReservationDelete(reservation: Reservation) {
+    private fun onReservationDelete(reservation: UserBookingInfo) {
+        vm.deleteReservation(reservation.room.roomNumber, reservation.timeslotID)
         adapter.deleteElement(reservation)
     }
 
@@ -72,7 +76,19 @@ class UserReservationsFragment : Fragment() {
             SpaceItemDecoration(verticalSpaceInDp = 8, horizontalSpaceInDp = 16)
         rvReservations.addItemDecoration(spaceItemDecoration)
 
-//        adapter.setData(tempData)
+    }
+
+    private fun initObservers() {
+        vm.userReservations.observe(viewLifecycleOwner) {
+            data = vm.convertInfo(it)
+        }
+        vm.isDataReady.observe(viewLifecycleOwner) {
+            if(it) {
+                shimmer.stopShimmer()
+                shimmer.visibility = View.GONE
+                adapter.setData(data)
+            }
+        }
     }
 
 }

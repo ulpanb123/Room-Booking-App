@@ -4,9 +4,11 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import com.example.jusanbookingapp.R
 import com.example.jusanbookingapp.presentation.utils.extensions.convertMillisToDate
@@ -16,9 +18,12 @@ import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BookRoomDialogFragment : DialogFragment() {
+interface DialogListener {
+    fun onDialogClosed()
+}
+class BookRoomDialogFragment(val listener : DialogListener) : DialogFragment() {
 
-    private lateinit var etDate : TextInputEditText
+    private lateinit var etPurpose : TextInputEditText
     private lateinit var etStartTime : TextInputEditText
     private lateinit var etEndTime : TextInputEditText
     private lateinit var btnSubmit : AppCompatButton
@@ -27,11 +32,9 @@ class BookRoomDialogFragment : DialogFragment() {
     private lateinit var dialogMainContent : LinearLayout
     private lateinit var dialogSuccess : LinearLayout
 
-    private lateinit var timeSlot : TimeSlot
-    private var datePicked : Long = 0L
-    private var startTime : Long = 0L
-    private var endTime : Long = 0L
-
+    private var datePicked = ""
+    private var startTime = ""
+    private var endTime = ""
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val customView : View = layoutInflater.inflate(R.layout.dialog_book_room, null)
         val dialog : AlertDialog = AlertDialog.Builder(requireContext()).apply {
@@ -39,7 +42,7 @@ class BookRoomDialogFragment : DialogFragment() {
         }.create()
 
         with(customView) {
-            etDate = findViewById(R.id.dateInputEditText)
+            etPurpose = findViewById(R.id.dateInputEditText)
             etStartTime = findViewById(R.id.startTimeInputEditText)
             etEndTime = findViewById(R.id.endTimeInputEditText)
             btnSubmit= findViewById(R.id.submitButton)
@@ -50,14 +53,13 @@ class BookRoomDialogFragment : DialogFragment() {
         }
         btnSubmit.setOnClickListener {
             saveTimeSlot()
-            //submitBooking()
-
             dialogMainContent.visibility = View.GONE
             dialogSuccess.visibility = View.VISIBLE
         }
 
         btnClose.setOnClickListener {
             dialog.dismiss()
+            listener.onDialogClosed()
         }
 
         initDatePicker()
@@ -69,19 +71,22 @@ class BookRoomDialogFragment : DialogFragment() {
     }
 
     private fun initDatePicker() {
-        val sharedPrefs = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-        datePicked = sharedPrefs?.getLong("date", 0L) ?: 0L
-        val date = Date(datePicked).convertMillisToDate("yyyy-MM-dd")
-        etDate.setText(date)
+        etPurpose.doOnTextChanged { text, start, before, count ->
+            val sharedPrefs = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            val editor = sharedPrefs?.edit()
+            editor?.putString("purpose", text.toString())
+            editor?.apply()
+        }
     }
+
 
     private fun initTimePicker() {
         etStartTime.setOnClickListener {
             val picker =
                 MaterialTimePicker.Builder()
                     .setTimeFormat(TimeFormat.CLOCK_24H)
-                    .setHour(12)
-                    .setMinute(15)
+                    .setHour(9)
+                    .setMinute(0)
                     .setTitleText("Pick start time:")
                     .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
                     .build()
@@ -98,7 +103,7 @@ class BookRoomDialogFragment : DialogFragment() {
                 val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
                 val time = formatter.format(calendar.time)
 
-                startTime = calendar.timeInMillis
+                startTime = time
 
                 etStartTime.setText(time)
             }
@@ -110,8 +115,8 @@ class BookRoomDialogFragment : DialogFragment() {
             val picker =
                 MaterialTimePicker.Builder()
                     .setTimeFormat(TimeFormat.CLOCK_24H)
-                    .setHour(12)
-                    .setMinute(15)
+                    .setHour(9)
+                    .setMinute(0)
                     .setTitleText("Pick start time:")
                     .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
                     .build()
@@ -127,7 +132,7 @@ class BookRoomDialogFragment : DialogFragment() {
                 val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
                 val time = formatter.format(calendar.time)
 
-                endTime = calendar.timeInMillis
+                endTime = time
                 etEndTime.setText(time)
             }
 
@@ -136,7 +141,11 @@ class BookRoomDialogFragment : DialogFragment() {
     }
 
     private fun saveTimeSlot() {
-        timeSlot = TimeSlot(datePicked+startTime, datePicked+endTime)
+        val sharedPref = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPref?.edit()
+        editor?.putString("startTime", startTime)
+        editor?.putString("endTime", endTime)
+        editor?.apply()
     }
 
     data class TimeSlot(

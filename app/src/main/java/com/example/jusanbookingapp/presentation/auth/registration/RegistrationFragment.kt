@@ -8,6 +8,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -25,6 +26,8 @@ class RegistrationFragment : Fragment() {
     private lateinit var etEmail : TextInputEditText
     private lateinit var etPassword : TextInputEditText
 
+    private lateinit var tvNavtoLogin : TextView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +43,11 @@ class RegistrationFragment : Fragment() {
         etUsername = view.findViewById(R.id.usernameInputEditText)
         etEmail = view.findViewById(R.id.emailEditTextView)
         etPassword = view.findViewById(R.id.passwordEditTextView)
+        tvNavtoLogin = view.findViewById(R.id.tv_nav_to_login)
+
+        tvNavtoLogin.setOnClickListener {
+            findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
+        }
 
         etUsername.doOnTextChanged { text, start, before, count ->
             checkRequiredFields()

@@ -1,6 +1,7 @@
 package com.example.jusanbookingapp.domain.models
 
 import android.os.Parcelable
+import android.util.Log
 import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Reservation(
@@ -11,9 +12,10 @@ data class Reservation(
 {
     @Parcelize
     data class TimeSlot(
-        val start : Int,
-        val end : Int,
-        val userID : Int,
+        val start : Long,
+        val end : Long,
+        val userID : Long,
+        val timeslotID : Long,
         val purpose : String
     ) : Parcelable
 }

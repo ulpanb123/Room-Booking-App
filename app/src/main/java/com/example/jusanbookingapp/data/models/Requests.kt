@@ -18,8 +18,20 @@ data class LoginRequest(
 
 @Parcelize
 data class GetReservationsRequest(
-    val start : Int,
-    val ent : Int
+    val start : Long,
+    val end : Long
 ) : Parcelable
+
+@Parcelize
+data class AddTimeSlotRequest(
+    val timeslots : List<Timeslot>
+) : Parcelable {
+    @Parcelize
+    data class Timeslot(
+        val start : Long,
+        val end : Long,
+        val purpose : String
+    ) : Parcelable
+}
 
 

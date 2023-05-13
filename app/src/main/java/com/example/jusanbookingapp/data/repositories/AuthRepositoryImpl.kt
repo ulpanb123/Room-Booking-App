@@ -37,6 +37,6 @@ class AuthRepositoryImpl(private val api : ApiService) : AuthRepository {
         val request = LoginRequest(username = username, password = password)
         val response = api.login(request)
 
-        return User(token = response.token, userId = response.id)
+        return User(token = response.token, userID = response.userID)
     }
 }

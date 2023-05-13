@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
+import androidx.navigation.fragment.findNavController
 import com.example.jusanbookingapp.R
 import com.example.jusanbookingapp.presentation.MainActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -23,6 +25,7 @@ class LoginFragment : Fragment() {
     private lateinit var loadingButton: LoadingButton
     private lateinit var etUsername : TextInputEditText
     private lateinit var etPassword : TextInputEditText
+    private lateinit var tvNavToRegistration : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,11 @@ class LoginFragment : Fragment() {
     fun initViews(view: View) {
         etUsername = view.findViewById(R.id.usernameInputEditText)
         etPassword = view.findViewById(R.id.passwordEditTextView)
+        tvNavToRegistration = view.findViewById(R.id.createUserButton)
+
+        tvNavToRegistration.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegistrationFragment())
+        }
 
         etUsername.doOnTextChanged { text, start, before, count ->
             checkRequiredFields()

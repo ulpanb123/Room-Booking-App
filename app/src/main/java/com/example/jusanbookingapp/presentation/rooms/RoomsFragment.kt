@@ -13,6 +13,7 @@ import com.example.jusanbookingapp.R
 import com.example.jusanbookingapp.domain.models.Room
 import com.example.jusanbookingapp.presentation.utils.ClickListener
 import com.example.jusanbookingapp.presentation.utils.SpaceItemDecoration
+import com.facebook.shimmer.ShimmerFrameLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -23,6 +24,8 @@ class RoomsFragment : Fragment() {
     lateinit var rvRooms: RecyclerView
 
     lateinit var adapter: RoomsAdapter
+
+    private lateinit var shimmer : ShimmerFrameLayout
 
 
     override fun onCreateView(
@@ -43,6 +46,8 @@ class RoomsFragment : Fragment() {
 
     private fun initViews(view: View) {
         rvRooms = view.findViewById(R.id.rv_rooms)
+        shimmer = view.findViewById(R.id.shimmerFrameLayout)
+        shimmer.startShimmer()
     }
 
     private fun initAdapter() {
@@ -71,6 +76,8 @@ class RoomsFragment : Fragment() {
 
     private fun initObservers() {
         vm.rooms.observe(viewLifecycleOwner) {
+            shimmer.stopShimmer()
+            shimmer.visibility = View.GONE
             adapter.setData(it)
         }
     }

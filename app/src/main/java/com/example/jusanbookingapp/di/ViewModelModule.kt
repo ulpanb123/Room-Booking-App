@@ -2,6 +2,7 @@ package com.example.jusanbookingapp.di
 
 import com.example.jusanbookingapp.presentation.auth.login.LoginViewModel
 import com.example.jusanbookingapp.presentation.auth.registration.RegistrationViewModel
+import com.example.jusanbookingapp.presentation.profile.userReservations.UserReservationsViewModel
 import com.example.jusanbookingapp.presentation.rooms.RoomsViewModel
 import com.example.jusanbookingapp.presentation.rooms.roomDetails.RoomDetailsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,7 +16,14 @@ val viewModelModule = module {
         RoomDetailsViewModel(
             roomNumber = roomNumber,
             getRoomDetailsUseCase = get(),
-            getRoomReservationsByDateUseCase = get()
+            getRoomReservationsByDateUseCase = get(),
+            addReservationUseCase = get(),
+            deleteReservationUseCase = get()
         )
     }
+    viewModel { UserReservationsViewModel(
+        getUserReservationsUseCase = get(),
+        getRoomDetailsUseCase = get(),
+        deleteReservationUseCase = get()
+    ) }
 }

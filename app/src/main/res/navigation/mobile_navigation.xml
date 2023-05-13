@@ -45,4 +45,13 @@
         android:id="@+id/userReservationsFragment"
         android:name="com.example.jusanbookingapp.presentation.profile.userReservations.UserReservationsFragment"
         android:label="UserReservationsFragment" />
+    <fragment
+        android:id="@+id/splashScreenFragment2"
+        android:name="com.example.jusanbookingapp.presentation.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment2_to_navigation_rooms"
+            app:destination="@id/navigation_rooms" />
+    </fragment>
 </navigation>

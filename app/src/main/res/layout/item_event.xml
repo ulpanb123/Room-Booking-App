@@ -28,10 +28,19 @@
         android:id="@+id/tv_event_descr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="7"
+        android:layout_weight="6"
         android:text="Hackathon Presentation"
         style="@style/Body1TextStyle"
         android:textColor="@color/black"
         android:textAlignment="viewStart"/>
+
+    <ImageView
+        android:id="@+id/btnAdminDelete"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_delete"
+        android:layout_weight="1"
+        android:layout_gravity="center|end"
+        android:visibility="invisible"/>
 
 </LinearLayout>
